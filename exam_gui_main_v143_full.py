@@ -70,7 +70,7 @@ class MainApp(QWidget):
             cmd_keys = ['Ctrl+', 'Meta+']
             cmd_key_text = '⌘'
         else:
-            cmd_key = ['Ctrl+']
+            cmd_keys = ['Ctrl+']
             cmd_key_text = 'Ctrl+'
 
         layout = QVBoxLayout()
