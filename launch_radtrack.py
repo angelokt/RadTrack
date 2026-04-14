@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QLabel, QPushButton, QFileDialog,
     QListWidget, QListWidgetItem, QMessageBox, QHBoxLayout
 )
-from exam_gui_main_v143_full import MainApp
+from radtrack import MainApp
 
 class SettingsApp(QWidget):
     def __init__(self):
