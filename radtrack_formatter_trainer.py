@@ -122,13 +122,13 @@ class FormatterTrainerUnsupervised(QWidget):
         classifier.fit(X, clusters_adj)
         classifier_clusters = classifier.predict(X)
 
-        keys = ['text', 'report_index', 'sentence_index', 'num_sentences_in_report']
-        raw_output = [
-          [sentence[k] for k in keys] + list(X[i,:]) + [clusters_adj[i], classifier_clusters[i]]
-          for i, sentence in enumerate(self.sentences)
-        ]
-        raw_output_pd = pd.DataFrame(raw_output, columns = keys + list(vectorizer.get_feature_names_out()) + ['cluster_idx', 'logistic_regression_cluster_idx'], dtype=object)
-        raw_output_pd.to_csv(os.path.join(self.output_dir, 'FORMATTER_test_output.csv'))
+#        keys = ['text', 'report_index', 'sentence_index', 'num_sentences_in_report']
+#        raw_output = [
+#          [sentence[k] for k in keys] + list(X[i,:]) + [clusters_adj[i], classifier_clusters[i]]
+#          for i, sentence in enumerate(self.sentences)
+#        ]
+#        raw_output_pd = pd.DataFrame(raw_output, columns = keys + list(vectorizer.get_feature_names_out()) + ['cluster_idx', 'logistic_regression_cluster_idx'], dtype=object)
+#        raw_output_pd.to_csv(os.path.join(self.output_dir, 'FORMATTER_test_output.csv'))
 
         # Save the pipeline
         self.model = Pipeline([
