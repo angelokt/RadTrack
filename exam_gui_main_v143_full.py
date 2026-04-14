@@ -31,9 +31,13 @@ class MainApp(QWidget):
         self.formatter_model_path = formatter_model_path
         self.current_index = 0
         self.output_file = self.generate_output_filename()
-        self.use_formatter = True
 
-        self.load_formatter_model()
+        if self.formatter_model_path is not None:
+          self.use_formatter = True
+          self.load_formatter_model()
+        else:
+          self.use_formatter = False
+          self.formatter_model = None
         self.init_ui()
         self.load_row()
 
@@ -62,7 +66,9 @@ class MainApp(QWidget):
             self.formatter_model = joblib.load(self.formatter_model_path)
         except Exception as e:
             QMessageBox.critical(self, "Model Load Error", f"Failed to load formatter model: {e}")
-            sys.exit(1)
+            self.use_formatter = False
+            self.formatter_model = None
+#            sys.exit(1)
 
     def init_ui(self):
         # Platform-specific toggles
@@ -139,7 +145,8 @@ class MainApp(QWidget):
         tool_layout.addWidget(edit_box)
 
         self.toggle_formatter = QCheckBox("Enable Smart Formatting")
-        self.toggle_formatter.setChecked(True)
+        self.toggle_formatter.setChecked(self.use_formatter)
+        self.toggle_formatter.setEnabled(self.formatter_model is not None)
         self.toggle_formatter.stateChanged.connect(self.toggle_formatting)
         tool_layout.addWidget(self.toggle_formatter)
 
@@ -208,7 +215,7 @@ class MainApp(QWidget):
         return sentences
 
     def format_text(self, text):
-        if not self.use_formatter:
+        if not self.use_formatter or self.formatter_model is None:
             return text
 
 #        sentences = re.split(r'(?<=[:.!?])\s+', text.strip())

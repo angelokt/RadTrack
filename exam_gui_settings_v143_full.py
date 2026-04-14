@@ -14,7 +14,7 @@ class SettingsApp(QWidget):
         self.setWindowTitle("RadTrack Settings v1.4.3")
         self.resize(700, 500)
         self.df = None
-        self.formatter_model_path = "formatter_model.pkl"  # default
+        self.formatter_model_path = None  # default
 
         layout = QVBoxLayout(self)
 
@@ -41,7 +41,7 @@ class SettingsApp(QWidget):
         layout.addWidget(self.editable_list)
 
         formatter_row = QHBoxLayout()
-        self.formatter_label = QLabel("Model: formatter_model.pkl")
+        self.formatter_label = QLabel("Model: none")
         formatter_btn = QPushButton("🧠 Select Formatter Model (.pkl)")
         formatter_btn.clicked.connect(self.select_model)
         formatter_row.addWidget(self.formatter_label)
